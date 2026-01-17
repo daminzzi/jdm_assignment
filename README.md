@@ -88,14 +88,30 @@ npm run test
 
 상세 처리 방식은 [docs/EDGE_CASES.md](docs/EDGE_CASES.md) 참고
 
-## 7. 문서 구조 안내 (Documentation)
+## 7. 테스트 (Testing)
+
+- **환경/도구:** Vitest, React Testing Library, MSW로 API/컴포넌트/React Query 뮤테이션을 통합 테스트합니다. 설정은 [vitest.config.ts](vitest.config.ts), 핸들러/서버는 [tests/mocks](tests/mocks)에서 구성됩니다.
+- **주요 범위:**
+  - API 계층: 에러 코드 매핑, 토큰 만료(401/A003) 공통 처리 검증 → [tests/shared/api/fetcher.test.ts](tests/shared/api/fetcher.test.ts)
+  - 컴포넌트: 폼 에러 표시/네비게이션 → [tests/features/auth/ui](tests/features/auth/ui)
+  - React Query: 캐시 무효화/부분 성공/에러 처리 → [tests/features](tests/features)
+- **명령어:**
+  ```bash
+  npm run test           # 유닛/통합 테스트
+  npm run test:watch     # 감시 모드
+  npm run test:ui        # Vitest UI 대시보드
+  npm run test:coverage  # 커버리지
+  ```
+- **전체 테스트 개요:** 상세 케이스/파일 목록은 [TESTING.md](TESTING.md) 참고.
+
+## 8. 문서 구조 안내 (Documentation)
 
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) : 구조 및 상태/라우팅 설계
 - [docs/FEATURES.md](docs/FEATURES.md) : 기능별 UX/흐름 상세
 - [docs/EDGE_CASES.md](docs/EDGE_CASES.md) : 에러/예외 처리
 - [docs/DECISIONS.md](docs/DECISIONS.md) : 기술 선택 이유와 트레이드오프
 
-## 8. 개선 여지 / 아쉬운 점
+## 9. 개선 여지 / 아쉬운 점
 
 - 테스트: e2e 확장 및 실패 케이스 시나리오 추가
 - 접근성: 키보드 내비게이션/스크린리더 레이블 강화

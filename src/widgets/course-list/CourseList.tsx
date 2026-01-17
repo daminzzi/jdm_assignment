@@ -54,6 +54,12 @@ export default function CourseList({ sort }: CourseListProps) {
           <p className="text-sm text-gray-500">추가 강의가 있습니다. 아래로 스크롤하세요.</p>
         </li>
       )}
+
+      {data && data.pages[data.pages.length - 1]?.last === true && (
+        <li className="rounded-lg border bg-white p-4 text-center" role="status">
+          <p className="text-sm text-gray-500">더 이상 강의가 없습니다.</p>
+        </li>
+      )}
     </ul>
   );
 }
