@@ -63,7 +63,7 @@ export default function SignInForm() {
       <InputField
         label="이메일"
         placeholder="you@example.com"
-        type="email"
+        type="text"
         register={register("email")}
         error={errors.email?.message}
       />
