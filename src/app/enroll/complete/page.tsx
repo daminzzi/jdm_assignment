@@ -125,10 +125,10 @@ export default function EnrollCompletePage() {
           </Link>
           {hasFailed && (
             <Link
-              href="/enroll"
+              href="/courses"
               onClick={() => clearEnrollResult()}
               className="flex-1 rounded-lg bg-black px-6 py-3 text-center text-base font-medium text-white hover:bg-gray-800">
-              다시 신청하기
+              다시 선택하기
             </Link>
           )}
         </div>
