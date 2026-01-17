@@ -28,10 +28,14 @@ export default function SignUpPage() {
 
   return (
     <main className="min-h-dvh p-6">
-      <h1 className="text-xl font-bold">회원 가입</h1>
-      <div className="mt-6">
-        <SignUpForm />
-      </div>
+      <section className="mx-auto max-w-md" aria-labelledby="signup-heading">
+        <h1 id="signup-heading" className="text-xl font-bold">
+          회원 가입
+        </h1>
+        <div className="mt-6">
+          <SignUpForm />
+        </div>
+      </section>
     </main>
   );
 }

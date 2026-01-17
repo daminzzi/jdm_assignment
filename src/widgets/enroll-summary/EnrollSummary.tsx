@@ -37,34 +37,39 @@ export default function EnrollSummary() {
     <div className="mx-auto max-w-3xl space-y-6">
       {/* 에러 메시지 */}
       {errorMessage && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+        <section
+          className="rounded-lg border border-red-200 bg-red-50 p-4"
+          role="alert"
+          aria-live="assertive">
           <p className="text-sm font-medium text-red-800">{errorMessage}</p>
           <button
             onClick={() => setErrorMessage(null)}
             className="mt-2 text-sm text-red-600 underline">
             닫기
           </button>
-        </div>
+        </section>
       )}
 
       {/* 선택 강의 목록 */}
-      <div className="space-y-3">
+      <section className="space-y-3" aria-label="선택된 강의 목록">
         <h2 className="text-lg font-bold text-gray-900">
           선택한 강의 ({selectedCourses.length}개)
         </h2>
-        {selectedCourses.map((course) => (
-          <div key={course.id} className="rounded-lg border bg-white p-4 shadow-sm">
-            <h3 className="font-semibold text-gray-900">{course.title}</h3>
-            <div className="mt-2 flex items-center justify-between text-sm text-gray-600">
-              <span>{course.instructorName}</span>
-              <span className="font-medium text-gray-900">{course.price.toLocaleString()}원</span>
-            </div>
-            <div className="mt-1 text-xs text-gray-500">
-              잔여석: {course.availableSeats}/{course.maxStudents}
-            </div>
-          </div>
-        ))}
-      </div>
+        <ul className="space-y-3">
+          {selectedCourses.map((course) => (
+            <li key={course.id} className="rounded-lg border bg-white p-4 shadow-sm">
+              <h3 className="font-semibold text-gray-900">{course.title}</h3>
+              <div className="mt-2 flex items-center justify-between text-sm text-gray-600">
+                <span>{course.instructorName}</span>
+                <span className="font-medium text-gray-900">{course.price.toLocaleString()}원</span>
+              </div>
+              <div className="mt-1 text-xs text-gray-500">
+                잔여석: {course.availableSeats}/{course.maxStudents}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {/* 총 금액 */}
       <div className="rounded-lg border-2 border-gray-900 bg-gray-50 p-4">

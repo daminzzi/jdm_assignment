@@ -28,10 +28,14 @@ export default function SignInPage() {
 
   return (
     <main className="min-h-dvh p-6">
-      <h1 className="text-xl font-bold">Sign In</h1>
-      <div className="mt-6">
-        <SignInForm />
-      </div>
+      <section className="mx-auto max-w-md" aria-labelledby="signin-heading">
+        <h1 id="signin-heading" className="text-xl font-bold">
+          로그인
+        </h1>
+        <div className="mt-6">
+          <SignInForm />
+        </div>
+      </section>
     </main>
   );
 }

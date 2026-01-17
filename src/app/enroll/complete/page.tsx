@@ -34,7 +34,7 @@ export default function EnrollCompletePage() {
     <main className="min-h-dvh bg-gray-50 py-8">
       <div className="mx-auto max-w-3xl px-4">
         {/* 헤더 */}
-        <div className="mb-6 text-center">
+        <header className="mb-6 text-center">
           <div
             className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full ${
               hasSuccess && !hasFailed
@@ -42,7 +42,8 @@ export default function EnrollCompletePage() {
                 : hasSuccess && hasFailed
                   ? "bg-yellow-100"
                   : "bg-red-100"
-            }`}>
+            }`}
+            aria-hidden="true">
             <span className="text-3xl">
               {hasSuccess && !hasFailed ? "✓" : hasSuccess && hasFailed ? "⚠" : "✕"}
             </span>
@@ -59,17 +60,17 @@ export default function EnrollCompletePage() {
               ? `${success.length}개의 강의 신청이 완료되었습니다.`
               : "모든 강의 신청에 실패했습니다."}
           </p>
-        </div>
+        </header>
 
         {/* 성공 목록 */}
         {hasSuccess && (
-          <div className="mb-6">
+          <section className="mb-6" aria-label="수강신청 완료된 강의">
             <h2 className="mb-3 text-lg font-semibold text-green-700">
               신청 완료 ({success.length}개)
             </h2>
-            <div className="space-y-3">
+            <ul className="space-y-3">
               {success.map((item) => (
-                <div
+                <li
                   key={item.enrollmentId}
                   className="rounded-lg border border-green-200 bg-green-50 p-4">
                   <div className="flex items-start justify-between">
@@ -83,21 +84,21 @@ export default function EnrollCompletePage() {
                       완료
                     </span>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </section>
         )}
 
         {/* 실패 목록 */}
         {hasFailed && (
-          <div className="mb-6">
+          <section className="mb-6" aria-label="수강신청 실패된 강의">
             <h2 className="mb-3 text-lg font-semibold text-red-700">
               신청 실패 ({failed.length}개)
             </h2>
-            <div className="space-y-3">
+            <ul className="space-y-3">
               {failed.map((item, index) => (
-                <div
+                <li
                   key={`${item.courseId}-${index}`}
                   className="rounded-lg border border-red-200 bg-red-50 p-4">
                   <div className="flex items-start justify-between">
@@ -109,10 +110,10 @@ export default function EnrollCompletePage() {
                       실패
                     </span>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </section>
         )}
 
         {/* 액션 버튼 */}

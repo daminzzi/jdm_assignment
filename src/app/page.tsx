@@ -31,14 +31,14 @@ export default function Home() {
     <main className="flex min-h-dvh items-center justify-center bg-linear-to-b from-orange-50 to-gray-50 px-4 py-8">
       <div className="mx-auto max-w-md space-y-8 text-center">
         {/* 헤더 */}
-        <div className="space-y-3">
+        <header className="space-y-3">
           <h1 className="text-4xl font-bold text-gray-900">월급쟁이 부자들</h1>
           <p className="text-lg text-orange-600 font-semibold">당신이 부자가 되는 곳</p>
           <p className="text-sm text-gray-600">직장인을 위한 재테크·부동산 교육 플랫폼</p>
-        </div>
+        </header>
 
         {/* 설명 섹션 */}
-        <div className="space-y-4 rounded-lg bg-white p-6 shadow-sm border border-orange-100">
+        <section className="space-y-4 rounded-lg bg-white p-6 shadow-sm border border-orange-100">
           <div className="space-y-3">
             <div className="flex items-center justify-center gap-2">
               <span className="text-3xl">💰</span>
@@ -51,10 +51,10 @@ export default function Home() {
               커리큘럼으로 시작하세요.
             </p>
           </div>
-        </div>
+        </section>
 
         {/* 액션 버튼 */}
-        <div className="space-y-3">
+        <nav className="space-y-3">
           <Link
             href="/sign-in"
             className="block w-full rounded-lg bg-orange-600 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-orange-700">
@@ -65,7 +65,7 @@ export default function Home() {
             className="block w-full rounded-lg border-2 border-orange-600 px-6 py-3 text-center text-base font-semibold text-orange-600 transition-colors hover:border-orange-700 hover:bg-orange-50">
             회원가입
           </Link>
-        </div>
+        </nav>
 
         {/* 하단 텍스트 */}
         <p className="text-xs text-gray-500">지금 부자되는 커리큘럼 확인하고 강의를 탐색해보세요</p>

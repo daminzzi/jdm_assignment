@@ -32,20 +32,23 @@ export default function EnrollPage() {
     <main className="min-h-dvh bg-gray-50 py-8">
       <div className="mx-auto max-w-3xl px-4">
         {/* 헤더 */}
-        <div className="mb-6">
+        <header className="mb-6">
           <Link
             href="/courses"
-            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
+            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900"
+            aria-label="강의 목록으로 돌아가기">
             ← 강의 목록으로 돌아가기
           </Link>
           <h1 className="mt-4 text-3xl font-bold text-gray-900">수강 신청 확인</h1>
           <p className="mt-2 text-sm text-gray-600">
             선택한 강의를 확인하고 수강 신청을 완료하세요.
           </p>
-        </div>
+        </header>
 
         {/* 메인 콘텐츠 */}
-        <EnrollSummary />
+        <section>
+          <EnrollSummary />
+        </section>
       </div>
     </main>
   );

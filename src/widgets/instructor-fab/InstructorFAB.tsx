@@ -14,8 +14,6 @@ export default function InstructorFAB() {
       ?.split("=")[1];
 
     setIsInstructor(roleCookie === "INSTRUCTOR");
-
-    console.log(roleCookie === "INSTRUCTOR");
   }, []);
 
   if (!isInstructor) {

@@ -12,7 +12,7 @@ export default function CourseList({ sort }: CourseListProps) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError, refetch } =
     useCoursesQuery(sort);
 
-  const sentinelRef = useIntersection(() => {
+  const sentinelRef = useIntersection<HTMLLIElement>(() => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
@@ -34,24 +34,26 @@ export default function CourseList({ sort }: CourseListProps) {
   const allCourses = data?.pages.flatMap((page) => page.content) || [];
 
   return (
-    <div className="space-y-4 pb-20 sm:pb-32">
+    <ul className="space-y-4 pb-20 sm:pb-32" role="list">
       {allCourses.map((course) => (
-        <CourseCard key={course.id} course={course} />
+        <li key={course.id}>
+          <CourseCard course={course} />
+        </li>
       ))}
 
-      <div ref={sentinelRef} className="h-32" />
+      <li ref={sentinelRef} className="h-32" aria-hidden="true" />
 
       {isFetchingNextPage && (
-        <div className="py-4 text-center">
+        <li className="py-4 text-center" role="status" aria-live="polite">
           <p className="text-sm text-gray-500">강의를 불러오는 중...</p>
-        </div>
+        </li>
       )}
 
       {data && data.pages[data.pages.length - 1]?.last === false && !isFetchingNextPage && (
-        <div className="rounded-lg border bg-white p-4 text-center">
+        <li className="rounded-lg border bg-white p-4 text-center" role="status">
           <p className="text-sm text-gray-500">추가 강의가 있습니다. 아래로 스크롤하세요.</p>
-        </div>
+        </li>
       )}
-    </div>
+    </ul>
   );
 }

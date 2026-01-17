@@ -5,9 +5,12 @@ import Link from "next/link";
 export default function CreateCompletePagePage() {
   return (
     <main className="min-h-dvh bg-gray-50 py-8 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow p-8 max-w-md w-full text-center">
+      <section
+        className="bg-white rounded-lg shadow p-8 max-w-md w-full text-center"
+        role="status"
+        aria-live="polite">
         {/* 성공 아이콘 */}
-        <div className="mb-6 flex justify-center">
+        <div className="mb-6 flex justify-center" aria-hidden="true">
           <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full">
             <svg
               className="w-8 h-8 text-green-600"
@@ -35,7 +38,7 @@ export default function CreateCompletePagePage() {
           className="inline-block w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium py-2 px-4 rounded-md transition">
           강의 관리로 돌아가기
         </Link>
-      </div>
+      </section>
     </main>
   );
 }

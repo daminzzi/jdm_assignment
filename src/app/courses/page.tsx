@@ -24,14 +24,16 @@ export default function CoursesPage() {
       </header>
 
       {/* 정렬 선택 */}
-      <div className="sticky top-20 z-20 border-b bg-white/95 backdrop-blur">
+      <nav
+        className="sticky top-20 z-20 border-b bg-white/95 backdrop-blur"
+        aria-label="강의 정렬 옵션">
         <div className="mx-auto max-w-4xl px-4 py-3 sm:px-6">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gray-600">정렬</span>
             <SortSelect />
           </div>
         </div>
-      </div>
+      </nav>
 
       {/* 강의 목록 */}
       <section className="mx-auto max-w-4xl px-4 py-6 sm:px-6">

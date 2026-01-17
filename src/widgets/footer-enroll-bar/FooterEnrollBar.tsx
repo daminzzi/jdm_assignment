@@ -11,7 +11,9 @@ export default function FooterEnrollBar() {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] backdrop-blur">
+    <footer
+      className="fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 shadow-[0_-4px_12px_rgba(0,0,0,0.08)] backdrop-blur"
+      aria-label="수강신청 바">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4 sm:px-6">
         <span className="text-sm font-medium text-gray-900">
           선택된 강의 <span className="font-bold text-blue-600">{selectedCourseIds.length}</span>개
@@ -30,6 +32,6 @@ export default function FooterEnrollBar() {
           </Link>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

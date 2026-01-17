@@ -34,7 +34,7 @@ export default function CourseCard({ course }: CourseCardProps) {
               <span className="ml-2">(남은 자리: {course.availableSeats})</span>
             </div>
             <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
-              ₩{course.price.toLocaleString()}
+              {course.price.toLocaleString()}원
             </span>
           </div>
           {course.isFull && <p className="mt-2 text-sm font-semibold text-red-600">정원 마감</p>}
