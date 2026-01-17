@@ -35,21 +35,31 @@ export const useAuthStore = create<AuthState>()(
       setRole: (role) => set({ role }),
       clearRole: () => set({ role: null }),
 
-      setAuth: (token, user) =>
+      setAuth: (token, user) => {
+        // role을 쿠키에 저장
+        if (typeof document !== "undefined") {
+          document.cookie = `role=${user.role}; path=/; max-age=86400`;
+        }
         set({
           accessToken: token,
           user,
           isAuthenticated: true,
           role: user.role === "STUDENT" ? "student" : "instructor",
-        }),
+        });
+      },
 
-      logout: () =>
+      logout: () => {
+        // 로그아웃 시 쿠키 삭제
+        if (typeof document !== "undefined") {
+          document.cookie = "role=; path=/; max-age=0";
+        }
         set({
           accessToken: null,
           user: null,
           isAuthenticated: false,
           role: null,
-        }),
+        });
+      },
     }),
     {
       name: "auth-storage",
