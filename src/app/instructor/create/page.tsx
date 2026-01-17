@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import CreateCourseForm from "@/features/create-course/ui/CreateCourseForm";
 

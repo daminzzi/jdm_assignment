@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface CourseSelectState {
   selectedCourseIds: number[];
@@ -6,15 +7,22 @@ interface CourseSelectState {
   clear: () => void;
 }
 
-export const useCourseSelect = create<CourseSelectState>((set) => ({
-  selectedCourseIds: [],
+export const useCourseSelect = create<CourseSelectState>()(
+  persist(
+    (set) => ({
+      selectedCourseIds: [],
 
-  toggle: (id: number) =>
-    set((state) => ({
-      selectedCourseIds: state.selectedCourseIds.includes(id)
-        ? state.selectedCourseIds.filter((x) => x !== id)
-        : [...state.selectedCourseIds, id],
-    })),
+      toggle: (id: number) =>
+        set((state) => ({
+          selectedCourseIds: state.selectedCourseIds.includes(id)
+            ? state.selectedCourseIds.filter((x) => x !== id)
+            : [...state.selectedCourseIds, id],
+        })),
 
-  clear: () => set({ selectedCourseIds: [] }),
-}));
+      clear: () => set({ selectedCourseIds: [] }),
+    }),
+    {
+      name: "course-select-storage",
+    }
+  )
+);

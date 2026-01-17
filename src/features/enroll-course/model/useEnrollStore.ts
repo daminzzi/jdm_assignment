@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { EnrollResult } from "@/entities/enrollment";
 
 interface EnrollState {
@@ -7,8 +8,15 @@ interface EnrollState {
   clearEnrollResult: () => void;
 }
 
-export const useEnrollStore = create<EnrollState>((set) => ({
-  lastEnrollResult: null,
-  setEnrollResult: (result) => set({ lastEnrollResult: result }),
-  clearEnrollResult: () => set({ lastEnrollResult: null }),
-}));
+export const useEnrollStore = create<EnrollState>()(
+  persist(
+    (set) => ({
+      lastEnrollResult: null,
+      setEnrollResult: (result) => set({ lastEnrollResult: result }),
+      clearEnrollResult: () => set({ lastEnrollResult: null }),
+    }),
+    {
+      name: "enroll-result-storage",
+    }
+  )
+);

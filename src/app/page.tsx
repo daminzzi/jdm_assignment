@@ -10,13 +10,11 @@ export default function Home() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
-    // 로그인된 사용자는 강의 목록으로 자동 이동
     if (isAuthenticated) {
       router.replace("/courses");
     }
   }, [isAuthenticated, router]);
 
-  // 로그인 상태 확인 중
   if (isAuthenticated) {
     return (
       <main className="flex min-h-dvh items-center justify-center bg-gray-50">

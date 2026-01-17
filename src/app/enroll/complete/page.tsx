@@ -16,6 +16,12 @@ export default function EnrollCompletePage() {
     }
   }, [lastEnrollResult, router]);
 
+  useEffect(() => {
+    return () => {
+      clearEnrollResult();
+    };
+  }, [clearEnrollResult]);
+
   if (!lastEnrollResult) {
     return (
       <main className="flex min-h-dvh items-center justify-center bg-gray-50">
@@ -120,14 +126,12 @@ export default function EnrollCompletePage() {
         <div className="flex gap-3">
           <Link
             href="/courses"
-            onClick={() => clearEnrollResult()}
             className="flex-1 rounded-lg border bg-white px-6 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-50">
             강의 목록으로
           </Link>
           {hasFailed && (
             <Link
               href="/courses"
-              onClick={() => clearEnrollResult()}
               className="flex-1 rounded-lg bg-black px-6 py-3 text-center text-base font-medium text-white hover:bg-gray-800">
               다시 선택하기
             </Link>

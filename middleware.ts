@@ -3,16 +3,20 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const role = request.cookies.get("role")?.value;
 
-  // /instructor/* 경로 보호
+  // /instructor/* 경로 보호 - role이 없거나 INSTRUCTOR가 아니면 리다이렉트
   if (pathname.startsWith("/instructor")) {
-    const role = request.cookies.get("role")?.value;
-
-    // role 쿠키가 없거나 INSTRUCTOR가 아니면 리다이렉트
     if (!role || role !== "INSTRUCTOR") {
-      // role이 없으면 /sign-in으로, 있지만 INSTRUCTOR가 아니면 /courses로
       const redirectUrl = !role ? "/sign-in" : "/courses";
       return NextResponse.redirect(new URL(redirectUrl, request.url));
+    }
+  }
+
+  // /enroll 경로 보호 - 로그인이 필요함
+  if (pathname.startsWith("/enroll")) {
+    if (!role) {
+      return NextResponse.redirect(new URL("/sign-in", request.url));
     }
   }
 
@@ -20,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/instructor/:path*"],
+  matcher: ["/instructor/:path*", "/enroll/:path*"],
 };

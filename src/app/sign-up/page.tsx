@@ -10,7 +10,6 @@ export default function SignUpPage() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
-    // 이미 로그인한 사용자는 강의 목록으로 리다이렉트
     if (isAuthenticated) {
       router.replace("/courses");
     }
