@@ -52,9 +52,10 @@ export default function SignUpForm() {
               message,
             });
           });
+        } else {
+          // 필드 에러가 없으면 전역 에러 표시
+          setApiError(err.message);
         }
-        // 전역 에러 표시
-        setApiError(err.message);
       } else {
         const errorMessage = err instanceof Error ? err.message : "회원가입에 실패했습니다.";
         setApiError(errorMessage);
@@ -70,7 +71,7 @@ export default function SignUpForm() {
 
       <InputField
         label="이름"
-        placeholder="홍길동"
+        placeholder="이름"
         type="text"
         register={register("name")}
         error={errors.name?.message}
@@ -86,7 +87,7 @@ export default function SignUpForm() {
 
       <InputField
         label="휴대폰 번호"
-        placeholder="010-1234-5678"
+        placeholder="010-0000-0000"
         type="tel"
         register={register("phone")}
         error={errors.phone?.message}
