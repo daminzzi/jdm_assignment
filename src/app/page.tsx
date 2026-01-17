@@ -1,65 +1,75 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuthStore } from "@/features/auth/model/useAuthStore";
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    // 로그인된 사용자는 강의 목록으로 자동 이동
+    if (isAuthenticated) {
+      router.replace("/courses");
+    }
+  }, [isAuthenticated, router]);
+
+  // 로그인 상태 확인 중
+  if (isAuthenticated) {
+    return (
+      <main className="flex min-h-dvh items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <p className="text-gray-600">강의 목록으로 이동 중...</p>
         </div>
       </main>
-    </div>
+    );
+  }
+
+  return (
+    <main className="flex min-h-dvh items-center justify-center bg-linear-to-b from-orange-50 to-gray-50 px-4 py-8">
+      <div className="mx-auto max-w-md space-y-8 text-center">
+        {/* 헤더 */}
+        <div className="space-y-3">
+          <h1 className="text-4xl font-bold text-gray-900">월급쟁이 부자들</h1>
+          <p className="text-lg text-orange-600 font-semibold">당신이 부자가 되는 곳</p>
+          <p className="text-sm text-gray-600">직장인을 위한 재테크·부동산 교육 플랫폼</p>
+        </div>
+
+        {/* 설명 섹션 */}
+        <div className="space-y-4 rounded-lg bg-white p-6 shadow-sm border border-orange-100">
+          <div className="space-y-3">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-3xl">💰</span>
+              <span className="text-3xl">📈</span>
+              <span className="text-3xl">🏠</span>
+            </div>
+            <h2 className="text-lg font-semibold text-gray-900">재테크·부동산으로 부자되기</h2>
+            <p className="text-sm text-gray-600">
+              직장인을 위한 재테크와 부동산 투자 교육으로 경제적 자유를 얻으세요. 국내 1위 교육
+              커리큘럼으로 시작하세요.
+            </p>
+          </div>
+        </div>
+
+        {/* 액션 버튼 */}
+        <div className="space-y-3">
+          <Link
+            href="/sign-in"
+            className="block w-full rounded-lg bg-orange-600 px-6 py-3 text-center text-base font-semibold text-white transition-colors hover:bg-orange-700">
+            로그인
+          </Link>
+          <Link
+            href="/sign-up"
+            className="block w-full rounded-lg border-2 border-orange-600 px-6 py-3 text-center text-base font-semibold text-orange-600 transition-colors hover:border-orange-700 hover:bg-orange-50">
+            회원가입
+          </Link>
+        </div>
+
+        {/* 하단 텍스트 */}
+        <p className="text-xs text-gray-500">지금 부자되는 커리큘럼 확인하고 강의를 탐색해보세요</p>
+      </div>
+    </main>
   );
 }
