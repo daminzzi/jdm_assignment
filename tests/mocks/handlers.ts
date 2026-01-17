@@ -198,7 +198,7 @@ const enrollmentHandlers = {
           enrollmentId: 102,
         },
       ],
-      failure: [],
+      failed: [],
     });
   }),
 
@@ -210,7 +210,7 @@ const enrollmentHandlers = {
           enrollmentId: 101,
         },
       ],
-      failure: [
+      failed: [
         {
           courseId: 2,
           reason: '정원이 가득 찼습니다',
@@ -233,7 +233,7 @@ const enrollmentHandlers = {
   enrollBatchAllFailure: http.post(`${baseUrl}/api/enrollments/batch`, () => {
     return HttpResponse.json({
       success: [],
-      failure: [
+      failed: [
         {
           courseId: 1,
           reason: '정원이 가득 찼습니다',
