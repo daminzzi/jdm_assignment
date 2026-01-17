@@ -1,5 +1,12 @@
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+interface ErrorResponse {
+  status: number;
+  code?: string;
+  message?: string;
+  [key: string]: any;
+}
+
 export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   if (!baseUrl) throw new Error("NEXT_PUBLIC_API_BASE_URL is not set");
 
@@ -12,8 +19,21 @@ export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> 
   });
 
   if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`API Error ${res.status}: ${text}`);
+    let errorData: ErrorResponse = {
+      status: res.status,
+      message: `API Error ${res.status}`,
+    };
+
+    try {
+      errorData = { ...errorData, ...(await res.json()) };
+    } catch {
+      const text = await res.text().catch(() => "");
+      errorData.message = text || `API Error ${res.status}`;
+    }
+
+    const error = new Error(errorData.message || `API Error ${res.status}`);
+    (error as any).response = errorData;
+    throw error;
   }
 
   return (await res.json()) as T;
