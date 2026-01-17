@@ -4,6 +4,7 @@ export function parseApiError(
   fieldExtractor?: (message: string, code: string) => string | null
 ): Record<string, string> {
   const fieldErrors: Record<string, string> = {};
+  if (errorResponse === null) return fieldErrors;
 
   // 에러 응답이 배열인 경우 (여러 필드 에러)
   if (Array.isArray(errorResponse)) {
