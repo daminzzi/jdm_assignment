@@ -21,3 +21,24 @@ export interface CoursesResponse {
   first: boolean;
   last: boolean;
 }
+
+export interface CreateCourseRequest {
+  title: string;
+  description?: string;
+  instructorName: string;
+  maxStudents: number;
+  price: number;
+}
+
+export interface CreateCourseResponse {
+  id: number;
+  title: string;
+  description?: string;
+  instructorName: string;
+  maxStudents: number;
+  currentStudents: number;
+  availableSeats: number;
+  isFull: boolean;
+  price: number;
+  createdAt: string;
+}

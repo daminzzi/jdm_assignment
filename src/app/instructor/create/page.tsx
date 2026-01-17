@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import CreateCourseForm from "@/features/create-course/ui/CreateCourseForm";
 
 export default function CreateCoursePage() {
   return (
@@ -17,11 +18,9 @@ export default function CreateCoursePage() {
           <p className="mt-2 text-gray-600">새로운 강의를 개설하세요.</p>
         </div>
 
-        {/* 강의 개설 폼 (향후 구현) */}
-        <div className="bg-white rounded-lg shadow p-8">
-          <div className="text-center py-12">
-            <p className="text-gray-500">강의 개설 폼이 곧 추가됩니다.</p>
-          </div>
+        {/* 강의 개설 폼 */}
+        <div className="bg-white rounded-lg shadow p-4">
+          <CreateCourseForm />
         </div>
       </div>
     </main>

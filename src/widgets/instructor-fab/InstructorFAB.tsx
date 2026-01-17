@@ -23,7 +23,7 @@ export default function InstructorFAB() {
   }
 
   return (
-    <div className="fixed right-6 bottom-8 z-40">
+    <div className="fixed right-6 bottom-24 z-30">
       {/* 메인 버튼 */}
       <Link
         href="/instructor"
